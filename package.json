@@ -1,0 +1,13 @@
+{
+  "name": "desafio---fundamentos-node",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "2023 Rocketseat - Desafio: Fundamentos do Node.js",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
