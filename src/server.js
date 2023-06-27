@@ -9,7 +9,7 @@ const server = http.createServer(async (req, res) => {
 
     if (req.method === 'POST' && req.url === '/tasks') {
         
-        await json(req)        
+        await json(req, res)
 
         const { title, description } = req.body
         
@@ -20,13 +20,11 @@ const server = http.createServer(async (req, res) => {
 
         tasks.push(task)
         
-        return res.end('Post new task')
+        return res.writeHead(201).end()
     }
 
     if (req.method === 'GET' && req.url === '/tasks') {
-        
-        const taskList = JSON.stringify(tasks)
-        return res.end(taskList)
+        return res.end(JSON.stringify(tasks))
     }    
 })
 
