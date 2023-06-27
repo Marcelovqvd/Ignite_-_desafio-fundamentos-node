@@ -1,19 +1,33 @@
 import http from 'node:http'
-import { routes } from './routes.js'
+import { json } from './middleware/json.js'
+
+const tasks = []
 
 const server = http.createServer(async (req, res) => {
     const { method, url } = req
+    
 
-    const route = routes.find(route => {
-        return route.method === method && route.path === url
-    })
+    if (req.method === 'POST' && req.url === '/tasks') {
+        
+        await json(req)        
 
-    if (route) {
-       return route.handler(req, res)
-    } else {
-        return JSON.stringify({meg: 'Error'})
+        const { title, description } = req.body
+        
+        const task = {
+            title,
+            description
+        }
+
+        tasks.push(task)
+        
+        return res.end('Post new task')
     }
-    return res.end()
+
+    if (req.method === 'GET' && req.url === '/tasks') {
+        
+        const taskList = JSON.stringify(tasks)
+        return res.end(taskList)
+    }    
 })
 
 server.listen(3333)
