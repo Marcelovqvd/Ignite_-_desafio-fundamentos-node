@@ -1,8 +1,8 @@
 export async function json(req, res) {
     const buffers = []
         
-        for await (const c of req) {
-            buffers.push(c)
+        for await (const chunk of req) {
+            buffers.push(chunk)
         }
 
         try {
